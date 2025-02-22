@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import {toast} from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Form() {
     const[title,setTitle]=useState('');
@@ -63,7 +63,12 @@ function Form() {
       </select>
       <button type="submit" className="py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-500  rounded-lg text-white bg-[#DD001E] w-full">Add Task</button>
     </form>
+    <Link to='/taskboard'>
+          <h1 className="font-bold text-[#DD001E] my-5">See all tasks</h1>
+    
+          </Link>
     </div>
+    
     </>
   )
 }

@@ -60,25 +60,33 @@ app.get("/tasks",async(req,res)=>{
     res.send(result);
 })
 //edit task 
-app.get("task/:id",async(req,res)=>{
+app.get("/task/:id",async(req,res)=>{
     const id=req.params.id;
     const query={_id:new ObjectId(id)};
     const result=await taskCollection.findOne(query);
     res.send(result);
 })
-app.put("/tasks/:id",async(req,res)=>{
-    const id=req.params.id;
-    const filter={_id:new ObjectId(id)};
-    const tobeUpdated=req.body;
-    const options = { upsert: true };
-    const updateDoc = {
-        $set: {
-          plot: tobeUpdated
-        },
-      };
-      const result = await taskCollection.updateOne(filter, tobeUpdated);
-      res.send(result);
-})
+app.put("/tasks/:id", async (req, res) => {
+  const id = req.params.id;
+  const filter = { _id: new ObjectId(id) };
+  const tobeUpdated = req.body;
+
+  const updateDoc = {
+      $set: tobeUpdated,
+  };
+
+  try {
+      const result = await taskCollection.updateOne(filter, updateDoc);
+      if (result.matchedCount === 0) {
+          return res.status(404).send({ message: "Task not found" });
+      }
+      res.send({ message: "Task updated successfully", result });
+  } catch (error) {
+      console.error("Error updating task:", error);
+      res.status(500).send({ message: "Failed to update task", error });
+  }
+});
+
 app.delete("/tasks/:id", async (req, res) => {
   const { id } = req.params;
 

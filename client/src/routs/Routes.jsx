@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element:<TaskBoard />
       },
       {
-        path:'/update',
+        path:'/update/:id',
         element:<UpdateTask />
       },
       {

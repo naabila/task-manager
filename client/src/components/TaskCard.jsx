@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 <FaEdit />
 
 function TaskCard({data,deleteTask}) {
@@ -15,7 +16,10 @@ function TaskCard({data,deleteTask}) {
             </div>
             <div className='flex gap-3 text-red-700 text-xl'>
             <MdDeleteOutline onClick={()=>deleteTask(data._id)} />
+            <Link to={`/update/${data?._id}`}>
             <FaEdit />
+            </Link>
+            
             </div>
            </div>
         </div>
