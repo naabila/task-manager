@@ -9,7 +9,7 @@ function Form() {
     // Handle task submit
     const handleTaskSubmit=async(e)=>{
         e.preventDefault();
-        const tasks={title,description,category};
+        const tasks={title,description,category, timeStamp:new Date().toISOString()};
         console.log(tasks);
        //post task to database
        try{
@@ -17,7 +17,7 @@ function Form() {
         setDescription("");
         setTitle("")
         toast("task added successfully")
-        return data;
+        
        }catch(err){
         toast.error(err)
        }
@@ -44,7 +44,7 @@ function Form() {
         className="textarea textarea-bordered w-full"
       />
        <select
-        className="select select-bordered w-full w-full"
+        className="select select-bordered w-full"
         value={category}
         onChange={(e)=>setCategory(e.target.value)}
       >
