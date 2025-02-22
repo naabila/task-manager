@@ -3,7 +3,20 @@ const app = express();
 var cors = require('cors')
 require('dotenv').config()
 const port =process.env.PORT||3000
-app.use(cors());
+//Must remove "/" from your production URL
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://jobtask-b4e37.firebaseapp.com",
+      "https://jobtask-b4e37.web.app",
+      "https://task-manager1r.netlify.app"
+      
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());;
 
 app.get('/', (req, res) => {
@@ -110,8 +123,8 @@ app.delete("/tasks/:id", async (req, res) => {
 
   
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
