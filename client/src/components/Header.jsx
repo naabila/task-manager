@@ -36,7 +36,17 @@ const handleLoginWithGoogle=()=>{
       });
   };
 
-
+// Logout
+const handleLogoutUser = () => {
+  logOutUser()
+    .then(() => {
+      toast.success("Logged out successfully");
+      navigate('/');
+    })
+    .catch((err) => {
+      toast.error("Error during logout: " + err.message);
+    });
+};
   return (
     <div className="navbar lg:px-32 bg-base-100">
   <div className="navbar-start">
@@ -61,7 +71,7 @@ const handleLoginWithGoogle=()=>{
   <div className="navbar-end">
   {
     user?
-    <button onClick={logOutUser} className="px-8 py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-700  rounded-lg text-white bg-[#DD001E]">Log out</button>
+    <button onClick={handleLogoutUser} className="px-8 py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-700  rounded-lg text-white bg-[#DD001E]">Log out</button>
     :
     <button onClick={handleLoginWithGoogle} className="px-8 py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-700  rounded-lg text-white bg-[#DD001E]">Login</button>
   }
