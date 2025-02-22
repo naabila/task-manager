@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import TaskBoard from "../components/TaskBoard";
 import UpdateTask from "../pages/UpdateTask";
 import Form from "../components/Form";
+import PrivateRoute from "./PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,15 +19,15 @@ const router = createBrowserRouter([
       },
       {
         path:'/taskboard',
-        element:<TaskBoard />
+        element:<PrivateRoute><TaskBoard /></PrivateRoute>
       },
       {
         path:'/update/:id',
-        element:<UpdateTask />
+        element:<PrivateRoute><UpdateTask /></PrivateRoute>
       },
       {
         path:'/addtask',
-        element:<Form />
+        element:<PrivateRoute><Form /></PrivateRoute>
       }
     ]
   },

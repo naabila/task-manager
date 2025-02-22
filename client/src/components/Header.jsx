@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GoogleAuthProvider } from 'firebase/auth';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import { AuthContext } from '../ContextProviders/AuthContextProvider';
 function Header() {
   const{googleLogin,logOutUser,user}=useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const navigate=useNavigate()
   console.log(user)
 const axiosPublic=useAxiosPublic();
 const handleLoginWithGoogle=()=>{
@@ -28,6 +29,7 @@ const handleLoginWithGoogle=()=>{
         })
         
         //  navigate(location?.state?location.state:"/")
+        navigate('/addtask')
       })
       .catch((err) => {
         toast.error("Error during Google login: " + err.message);

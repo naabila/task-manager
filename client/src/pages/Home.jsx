@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Banner from "../assets/banner.jpg"
+import { toast } from 'react-toastify'
+import { AuthContext } from '../ContextProviders/AuthContextProvider'
 function Home() {
+  const{user}=useContext(AuthContext);
   return (
    <>
        <div className="min-h-screen h-screen bg-white flex items-center">
@@ -17,9 +20,21 @@ function Home() {
             <p className="text-base md:text-lg text-gray-500 mb-8">
               An Intranet platform to Manage projects, organise work and focus on what's important.
             </p>
-            <Link to='/addtask'>
-            <button className="px-8 py-5 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-700  rounded-lg text-white bg-[#DD001E]">Manage Task</button>
-            </Link>
+            {
+  user ? (
+    <Link to='/addtask'>
+      <button className="px-8 py-5 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all hover:border-red-700 rounded-lg text-white bg-[#DD001E]">
+        Manage Task
+      </button>
+    </Link>
+  ) : (
+    <button onClick={()=>toast.error("Please Login to manage task")} className="px-8 py-5 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all hover:border-red-700 rounded-lg text-white bg-[#DD001E]">
+        Manage Task
+      </button>
+    
+  )
+}
+
           </div>
           <div className="flex justify-center">
             <img
