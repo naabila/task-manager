@@ -79,13 +79,22 @@ app.put("/tasks/:id",async(req,res)=>{
       const result = await taskCollection.updateOne(filter, tobeUpdated);
       res.send(result);
 })
-// delete task
-app.delete("/tasks/:id",async(req,res)=>{
-    const id=req.params.id;
-    const query={_id:new ObjectId(id)};
-    const result=await taskCollection.deleteOne(query);
-    res.send(result);
-})
+app.delete("/tasks/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid task ID" });
+  }
+
+  const query = { _id: new ObjectId(id) };
+  const result = await taskCollection.deleteOne(query);
+
+  if (result.deletedCount === 0) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+
+  res.json({ message: "Task deleted successfully", deletedCount: result.deletedCount });
+});
 
 
 

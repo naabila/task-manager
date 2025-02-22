@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import useAxiosPublic from "../hooks/useAxiosPublic";
-import {toast} from "react-toastify"
+import {toast} from "react-toastify";
+import { useNavigate } from 'react-router-dom';
+
 function Form() {
     const[title,setTitle]=useState('');
     const[description,setDescription]=useState("");
     const [category, setCategory] = useState("To-Do");
-    const axiosPublic=useAxiosPublic()
+    const axiosPublic=useAxiosPublic();
+    const navigate=useNavigate();
+
     // Handle task submit
     const handleTaskSubmit=async(e)=>{
         e.preventDefault();
@@ -15,7 +19,8 @@ function Form() {
        try{
         const {data}=await axiosPublic.post('/tasks',tasks);
         setDescription("");
-        setTitle("")
+        setTitle("");
+        navigate('/taskboard')
         toast("task added successfully")
         
        }catch(err){
@@ -26,6 +31,10 @@ function Form() {
   
   return (
     <>
+    <div className="container mx-auto">
+    <div className="flex justify-center">
+        <h1 className="font-bold text-[#DD001E] text-xl my-5">Task Management</h1>
+      </div>
     <form onSubmit={handleTaskSubmit} className="mb-4 p-4 bg-white shadow-md rounded-lg flex flex-col gap-2">
       <input
         type="text"
@@ -54,8 +63,9 @@ function Form() {
       </select>
       <button type="submit" className="py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-500  rounded-lg text-white bg-[#DD001E] w-full">Add Task</button>
     </form>
+    </div>
     </>
   )
 }
 
-export default Form
+export default Form;
