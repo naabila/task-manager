@@ -84,7 +84,7 @@ try {
         <option value="In Progress">In Progress</option>
         <option value="Done">Done</option>
       </select>
-      <button type="submit" className="py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-500  rounded-lg text-white bg-[#DD001E] w-full">Add Task</button>
+      <button type="submit" className="py-3 hover:text-[#DD001E] hover:bg-transparent hover:border-2 transition-all  hover:border-red-500  rounded-lg text-white bg-[#DD001E] w-full">Update Task</button>
     </form>
     </div>
     </>

@@ -20,8 +20,9 @@ function Form() {
         const {data}=await axiosPublic.post('/tasks',tasks);
         setDescription("");
         setTitle("");
-        navigate('/taskboard')
         toast("task added successfully")
+        navigate('/taskboard')
+        
         
        }catch(err){
         toast.error(err)

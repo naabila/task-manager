@@ -118,7 +118,26 @@ app.delete("/tasks/:id", async (req, res) => {
 });
 
 
+//Update category
+app.patch('/taskss/:id', async (req, res) => {
+  const { id } = req.params;
+  const { category } = req.body;
 
+  try {
+    const result = await db.collection('tasks').updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { category } }
+    );
+
+    if (result.modifiedCount > 0) {
+      res.status(200).json({ message: 'Task category updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Task not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating task category' });
+  }
+});
 
 
   
